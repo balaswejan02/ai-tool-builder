@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Tool Builder</title>
+  <link rel="stylesheet" href="/static/style.css">
+
+  <!-- Prism.js for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+  <!-- JSZip + FileSaver for ZIP download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</head>
+<body>
+  <h1>AI Tool Builder</h1>
+
+  <input type="text" id="ideaInput" placeholder="Enter your tool idea">
+  <button id="buildBtn">Build Tool</button>
+
+  <div id="output">
+    <h2>Generated Code:</h2>
+    <pre><code id="generatedCode" class="language-python"></code></pre>
+
+    <button id="copyBtn">Copy Code</button>
+    <button id="downloadBtn">Download ZIP</button>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

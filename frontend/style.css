@@ -1,0 +1,26 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 2rem;
+  background: #f9f9f9;
+}
+
+h1 {
+  color: #333;
+}
+
+input, button {
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+}
+
+#output {
+  margin-top: 2rem;
+}
+
+pre {
+  background: #272822;
+  color: #f8f8f2;
+  padding: 1rem;
+  border-radius: 5px;
+  overflow-x: auto;
+}
