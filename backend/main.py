@@ -28,9 +28,10 @@ def serve_frontend():
 def generate_code(prompt: str):
     try:
         response = client.models.generate_content(
-            model="gemini-1.5-flash",
-            contents=prompt
-        )
+    model="models/gemini-1.5-flash",  # ✅ include the full path
+    contents=prompt
+)
+
         return {"result": response.text}
     except Exception as e:
         return {"error": f"Generation failed: {str(e)}"}
