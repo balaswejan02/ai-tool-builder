@@ -3,31 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <title>AI Tool Builder</title>
-  <link rel="stylesheet" href="/static/style.css">
-
-  <!-- Prism.js for syntax highlighting -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-
-  <!-- JSZip + FileSaver for ZIP download -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.2em;
+    }
+    header p {
+      margin: 5px 0 0;
+      font-size: 1.1em;
+      font-weight: 300;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      margin-bottom: 15px;
+      padding: 12px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
+    }
+    button {
+      margin-right: 10px;
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #3498db;
+      color: white;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin-top: 20px;
+      font-family: Consolas, monospace;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      padding: 20px;
+      background: #2c3e50;
+      color: white;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
-  <h1>AI Tool Builder</h1>
+  <header>
+    <h1>AI Tool Builder</h1>
+    <p>Founder & CEO: Maramreddy Bala Swejan</p>
+  </header>
 
-  <input type="text" id="ideaInput" placeholder="Enter your tool idea">
-  <button id="buildBtn">Build Tool</button>
+  <div class="container">
+    <label for="prompt">Enter your prompt:</label>
+    <textarea id="prompt" placeholder="e.g. Write a Python script to sort numbers"></textarea>
+    <div>
+      <button onclick="generateCode()">Generate Code</button>
+      <button onclick="copyCode()">Copy Code</button>
+      <button onclick="downloadCode()">Download ZIP</button>
+    </div>
 
-  <div id="output">
-    <h2>Generated Code:</h2>
-    <pre><code id="generatedCode" class="language-python"></code></pre>
-
-    <button id="copyBtn">Copy Code</button>
-    <button id="downloadBtn">Download ZIP</button>
+    <pre id="output">Your generated code will appear here...</pre>
   </div>
 
-  <script src="/static/script.js"></script>
+  <footer>
+    <p>&copy; 2026 AI Tool Builder. All rights reserved.</p>
+  </footer>
+
+  <script>
+    async function generateCode() {
+      const prompt = document.getElementById("prompt").value;
+      const response = await fetch(`/generate?prompt=${encodeURIComponent(prompt)}`);
+      const data = await response.json();
+      document.getElementById("output").textContent = data.result || data.error;
+    }
+
+    function copyCode() {
+      const code = document.getElementById("output").textContent;
+      navigator.clipboard.writeText(code);
+      alert("Code copied to clipboard!");
+    }
+
+    function downloadCode() {
+      const code = document.getElementById("output").textContent;
+      const blob = new Blob([code], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "generated_code.zip";
+      link.click();
+    }
+  </script>
 </body>
 </html>
+<section class="about">
+  <h2>About the Founder</h2>
+  <p>AI Tool Builder was founded by <strong>Maramreddy Bala Swejan</strong>, serving as Founder & CEO, with a vision to make AI accessible to everyone.</p>
+</section>
+
+<meta name="description" content="AI Tool Builder - Create AI-powered tools instantly. Founded by Maramreddy Bala Swejan, Founder & CEO.">
+<meta name="keywords" content="AI Tool Builder, AI tools, code generation, Maramreddy Bala Swejan">
