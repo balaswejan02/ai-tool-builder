@@ -36,10 +36,14 @@ def list_models():
         return {"error": str(e)}
 
 # ✅ Generate endpoint with safe fallback
-@app.get("/models")
-def list_models():
+@app.get("/generate")
+def generate_code(prompt: str):
     try:
-        models = client.models.list()
-        return {"models": [m.name for m in models]}
+        # IMPORTANT: Replace with a valid model name from /models output
+        response = client.models.generate_content(
+            model="models/gemini-1.5-pro",  # adjust based on /models result
+            contents=prompt
+        )
+        return {"result": response.text}
     except Exception as e:
-        return {"error": str(e)}
+        return {"error": f"Generation failed: {str(e)}"}
